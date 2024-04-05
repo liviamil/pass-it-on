@@ -15,6 +15,8 @@ import { ShoppingCartIcon } from '@heroicons/react/20/solid';
 import productData from "@/public/script/scraped_data.json";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PinterestLayout from "@/components/PinterestLayout";
+import StaggeredLayout from "@/components/staggeredLayout";
 
 const staggeredWidths = ['240px', '230px', '250px'];
 
@@ -128,6 +130,10 @@ export default function ItemList() {
         </div>
       </div>
       
+      <StaggeredLayout />
+
+      {/* <PinterestLayout /> */}
+
       {/* <div className="flex justify-center items-center mt-7 grid-cols-4 gap-2 mx-px"> */}
         {/*Modular ProductCard  */}
         {/* <div className="grid grid-cols-3 gap-8">
@@ -178,18 +184,26 @@ export default function ItemList() {
             ))}
           </div> */}
 
-<div className="flex flex-wrap justify-center items-center mt-7 gap-6">
-  {Array.from({ length: Math.ceil(productData.length / 3) }).map((_, rowIndex) => (
-    <div key={rowIndex} className="flex justify-center items-center gap-10">
-      {productData.slice(rowIndex * 3, (rowIndex + 1) * 3).map((product, index) => (
-        <div key={product.id} className="px-2" style={{ width: staggeredWidths[index % staggeredWidths.length] }}>
-          <ProductCardStaggered product={product} width={staggeredWidths[index % staggeredWidths.length]} />
-        </div>
-      ))}
-    </div>
-  ))}
-</div>
+        {/* <div className="flex flex-wrap justify-center items-center mt-7 gap-6">
+          {Array.from({ length: Math.ceil(productData.length / 3) }).map((_, rowIndex) => (
+            <div key={rowIndex} className="flex justify-center items-center gap-10">
+              {productData.slice(rowIndex * 3, (rowIndex + 1) * 3).map((product, index) => (
+                <div key={product.id} className="px-2" style={{ width: staggeredWidths[index % staggeredWidths.length] }}>
+                  <ProductCardStaggered product={product} width={staggeredWidths[index % staggeredWidths.length]} />
+                </div>
+              ))}
+            </div>
+          ))}
+        </div> */}
 
+    
+        {/* <div className="product-grid">
+          {productData.map((product) => (
+            <div key={product.id} className="product-card">
+              <ProductCardStaggered product={product} width={{staggaredWidths}}/>
+            </div>
+          ))}
+        </div> */}
 
         {/* <div className="mt-10">
           <MasonryLayout productData={productData} />
@@ -200,5 +214,3 @@ export default function ItemList() {
     </main>
   );
 }
-
-// grid-cols-4 gap-2

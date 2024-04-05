@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Masonry from 'react-masonry-css';
 
 interface Product {
   id: string;
@@ -16,7 +15,7 @@ interface ProductCardProps {
   product: Product;
 }
 
-const ProductCardStaggered: React.FC<ProductCardProps & { width: string }> = ({ product, width }) => {
+const ProductCardStaggered: React.FC<ProductCardProps> = ({ product }) => {
   const truncatedDescription =
     product.description.length > 70
       ? `${product.description.slice(0, 70)}...`
@@ -40,38 +39,39 @@ const ProductCardStaggered: React.FC<ProductCardProps & { width: string }> = ({ 
 
   return (
     <div 
-      className="relative border border-gray-200 rounded-lg shadow-sm p-4"
-      style={{width: width}}>
-        {/* <p> {width} </p> */}
-      <p className="text-sm text-gray-600 mb-2 font-semibold">{product.id}</p>
-      <div className="relative">
-        <img
-          src={product.image}
-          alt={product.title}
-          className="w-full h-64 object-cover mb-2 rounded-2xl"
-          style={{ maxWidth: '205px', maxHeight: '205px' }}
-        />
-        <button
-          className={`absolute top-3 right-3 focus:outline-none ${
-            isClicked ? 'clicked' : ''
-          }`}
-          onClick={handleAddToCartClick}
-        >
-          <img src="/addButton.png" alt="Add to Cart" className="w-8 h-8" />
-        </button>
-      </div>
-      <h2 className="text-sm font-semibold mb-1">{product.title}</h2>
-      <p className="text-[0.7em] text-gray-600 mb-2">{truncatedDescription}</p>
-      <div className="flex flex-wrap">
-        <div className="w-3/4 pr-2 border-r border-gray-200">
-          <p className="text-[0.6em] text-gray-600">{formattedLocation}</p>
+      className="border border-gray-200 rounded-lg shadow-sm p-4"
+      style={{ width: '100%' }}>
+        <div>
+          <p className="text-sm text-gray-600 mb-2 font-semibold">{product.id}</p>
+          <div className="mb-2">
+          <img
+              src={product.image}
+              alt={product.title}
+              className="w-full h-full object-cover rounded-2xl"
+              style={{ minHeight: '100px' }} 
+            />
+            <button
+              className={`absolute top-3 right-3 focus:outline-none ${
+                isClicked ? 'clicked' : ''
+              }`}
+              onClick={handleAddToCartClick}
+            >
+              <img src="/addButton.png" alt="Add to Cart" className="w-8 h-8" />
+            </button>
+          </div>
+          <h2 className="text-sm font-semibold mb-0.2">{product.title}</h2>
+          <p className="text-[0.7em] text-gray-600 mb-2">{truncatedDescription}</p>
         </div>
-        <div className="w-1/4">
-          <p className="text-[0.6em] text-green-400 ml-2">
-            {product.delivery ? 'Delivery Covered' : 'Delivery Not Covered'}
-          </p>
+        <div className="flex justify-between items-center">
+          <div>
+            <p className="text-[0.6em] text-gray-600">{formattedLocation}</p>
+          </div>
+          <div>
+            <p className="text-[0.6em] text-green-400 ml-2">
+              {product.delivery ? 'Delivery Covered' : 'Delivery Not Covered'}
+            </p>
+          </div>
         </div>
-      </div>
       <style jsx>{`
         .clicked {
           transform: translateY(2px);
