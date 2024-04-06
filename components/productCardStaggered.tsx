@@ -13,9 +13,10 @@ interface Product {
 
 interface ProductCardProps {
   product: Product;
+  cardSize: 'small' | 'medium' | 'large';
 }
 
-const ProductCardStaggered: React.FC<ProductCardProps> = ({ product }) => {
+function ProductCardStaggered({ product, cardSize }: ProductCardProps) {
   const truncatedDescription =
     product.description.length > 70
       ? `${product.description.slice(0, 70)}...`
@@ -37,41 +38,65 @@ const ProductCardStaggered: React.FC<ProductCardProps> = ({ product }) => {
     }, 100);
   };
 
+  let height: number;
+
+  if (cardSize === 'small') {
+    height = 150;
+  } else if (cardSize === 'medium') {
+    height = 200;
+  } else {
+    height = 300;
+  }
+
+  const cardStyles = {
+    small: {
+      gridRowEnd: 'span 35'
+    },
+    medium: {
+      gridRowEnd: 'span 42'
+    },
+    large: {
+      gridRowEnd: 'span 50'
+    }
+  };
+
   return (
     <div 
-      className="border border-gray-200 rounded-lg shadow-sm p-4"
-      style={{ width: '100%' }}>
-        <div>
-          <p className="text-sm text-gray-600 mb-2 font-semibold">{product.id}</p>
-          <div className="mb-2">
+      className="border border-gray-200 rounded-lg shadow-sm p-4 mb-4 mx-2"
+      style={{ ...cardStyles[cardSize], width: '100% -2px' }}>  {/* -2 to give left right padding */}
+      <div>
+        <p className="text-sm text-gray-600 mb-2 font-semibold">
+          {product.id}
+        </p>
+        <div className="mb-2">
           <img
-              src={product.image}
-              alt={product.title}
-              className="w-full h-full object-cover rounded-2xl"
-              style={{ minHeight: '100px' }} 
-            />
-            <button
-              className={`absolute top-3 right-3 focus:outline-none ${
-                isClicked ? 'clicked' : ''
-              }`}
-              onClick={handleAddToCartClick}
-            >
-              <img src="/addButton.png" alt="Add to Cart" className="w-8 h-8" />
-            </button>
-          </div>
-          <h2 className="text-sm font-semibold mb-0.2">{product.title}</h2>
-          <p className="text-[0.7em] text-gray-600 mb-2">{truncatedDescription}</p>
+            src={product.image}
+            alt={product.title}
+            className="w-full object-cover rounded-2xl"
+            style={{ height: height, objectFit: 'cover' }} 
+          />
+          {/* <button
+            className={`absolute top-3 right-3 focus:outline-none ${
+              isClicked ? 'clicked' : ''
+            }`}
+            onClick={handleAddToCartClick}
+          >
+            <img src="/addButton.png" alt="Add to Cart" className="w-8 h-8" />
+          </button> */}
         </div>
-        <div className="flex justify-between items-center">
-          <div>
-            <p className="text-[0.6em] text-gray-600">{formattedLocation}</p>
-          </div>
-          <div>
-            <p className="text-[0.6em] text-green-400 ml-2">
-              {product.delivery ? 'Delivery Covered' : 'Delivery Not Covered'}
-            </p>
-          </div>
+        <h2 className="text-sm font-semibold mb-0.2">{product.title}</h2>
+        <p className="text-[0.7em] text-gray-600 mb-2">{truncatedDescription}</p>
+      </div>
+      <div className="flex justify-between items-center">
+        <div>
+          <p className="text-[0.6em] text-gray-600">{formattedLocation}</p>
         </div>
+        <div>
+          <p className="text-[0.6em] text-green-400 ml-2">
+            {product.delivery ? 'Delivery Covered' : 'Delivery Not Covered'}
+          </p>
+        </div>
+      </div>
       <style jsx>{`
         .clicked {
           transform: translateY(2px);
@@ -79,6 +104,7 @@ const ProductCardStaggered: React.FC<ProductCardProps> = ({ product }) => {
       `}</style>
     </div>
   );
-};
+}
+
 
 export default ProductCardStaggered;

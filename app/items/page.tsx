@@ -8,17 +8,11 @@ import Category from "@/components/category";
 import SearchButton from "@/components/searchButton";
 import ResetButton from "@/components/resetButton";
 import PageNav from "@/components/pageNav";
-import ProductCard from "@/components/productCard";
-import ProductCardStaggered from "@/components/productCardStaggered";
-import MasonryLayout from "@/components/masonryLayout";
 import { ShoppingCartIcon } from '@heroicons/react/20/solid';
-import productData from "@/public/script/scraped_data.json";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import PinterestLayout from "@/components/PinterestLayout";
 import StaggeredLayout from "@/components/staggeredLayout";
-
-const staggeredWidths = ['240px', '230px', '250px'];
+import ModularLayout from "@/components/modularLayout";
 
 export default function ItemList() {
   return (
@@ -132,85 +126,7 @@ export default function ItemList() {
       
       <StaggeredLayout />
 
-      {/* <PinterestLayout /> */}
-
-      {/* <div className="flex justify-center items-center mt-7 grid-cols-4 gap-2 mx-px"> */}
-        {/*Modular ProductCard  */}
-        {/* <div className="grid grid-cols-3 gap-8">
-          {productData.map(product => (
-             <ProductCard product={product} />
-          ))}
-        </div> */}
-
-        {/* <div className="mt-7"> */}
-          
-            {/* <div className="grid grid-cols-4 gap-2"> */}
-            {/* {productData.map((product, index) => (
-              <div key={product.id} className="justify-center">
-                  <ProductCardStaggered product={product} width={staggeredWidths[index % staggeredWidths.length]} />
-              </div>
-            ))} */}
-          {/* <div className="flex justify-center items-center mt-7">
-            {productData.map((product, index) => (
-              <ProductCardStaggered
-                key={product.id}
-                product={product}
-                width={staggeredWidths[index % staggeredWidths.length]}
-              />
-            ))}
-          </div> */}
-
-          {/* <div className="flex flex-wrap justify-center items-center mt-7 gap-6">
-            <ProductCardStaggered productData={productData} />
-          </div> */}
-
-          {/* <div className="flex flex-wrap justify-center items-center mt-7 gap-6">
-            {productData.map((product, index) => (
-              <div key={product.id} className="px-2" style={{ width: staggeredWidths[index % staggeredWidths.length] }}>
-                <ProductCardStaggered product={product} width={staggeredWidths[index % staggeredWidths.length]} />
-              </div>
-            ))}
-          </div> */}
-
-          {/* <div className="flex flex-wrap justify-center items-center mt-7 gap-6">
-            {Array.from({ length: Math.ceil(productData.length / 4) }).map((_, rowIndex) => (
-              <div key={rowIndex} className="flex justify-center items-center gap-6">
-                {productData.slice(rowIndex * 4, (rowIndex + 1) * 4).map((product, index) => (
-                  <div key={product.id} className="px-2" style={{ width: staggeredWidths[index % staggeredWidths.length] }}>
-                    <ProductCardStaggered product={product} width={staggeredWidths[index % staggeredWidths.length]} />
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div> */}
-
-        {/* <div className="flex flex-wrap justify-center items-center mt-7 gap-6">
-          {Array.from({ length: Math.ceil(productData.length / 3) }).map((_, rowIndex) => (
-            <div key={rowIndex} className="flex justify-center items-center gap-10">
-              {productData.slice(rowIndex * 3, (rowIndex + 1) * 3).map((product, index) => (
-                <div key={product.id} className="px-2" style={{ width: staggeredWidths[index % staggeredWidths.length] }}>
-                  <ProductCardStaggered product={product} width={staggeredWidths[index % staggeredWidths.length]} />
-                </div>
-              ))}
-            </div>
-          ))}
-        </div> */}
-
-    
-        {/* <div className="product-grid">
-          {productData.map((product) => (
-            <div key={product.id} className="product-card">
-              <ProductCardStaggered product={product} width={{staggaredWidths}}/>
-            </div>
-          ))}
-        </div> */}
-
-        {/* <div className="mt-10">
-          <MasonryLayout productData={productData} />
-        </div> */}
-
-        {/* </div> */}
-      {/* </div> */}
+      {/* <ModularLayout /> */}
     </main>
   );
 }
