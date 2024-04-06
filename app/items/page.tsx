@@ -8,11 +8,11 @@ import Category from "@/components/category";
 import SearchButton from "@/components/searchButton";
 import ResetButton from "@/components/resetButton";
 import PageNav from "@/components/pageNav";
-import ProductCard from "@/components/productCard";
 import { ShoppingCartIcon } from '@heroicons/react/20/solid';
-import productData from "@/public/script/scraped_data.json";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import StaggeredLayout from "@/components/staggeredLayout";
+import ModularLayout from "@/components/modularLayout";
 
 export default function ItemList() {
   return (
@@ -124,13 +124,9 @@ export default function ItemList() {
         </div>
       </div>
       
-      <div className="flex flex-row justify-center items-center mt-7">
-        <div className="grid grid-cols-3 gap-8">
-          {productData.map(product => (
-             <ProductCard product={product} />
-          ))}
-        </div>
-      </div>
+      <StaggeredLayout />
+
+      {/* <ModularLayout /> */}
     </main>
   );
 }
